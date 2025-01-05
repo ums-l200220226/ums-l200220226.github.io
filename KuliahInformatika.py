@@ -1,59 +1,44 @@
 from metaflow import FlowSpec, step
 
-class SemesterFlow(FlowSpec):
-    """A flow that simulates the process of a university semester in the Informatics program."""
-
+class KuliahFlow(FlowSpec):
     @step
     def start(self):
-        print("Memulai perjalanan semester di program Informatika.")
-        self.next(self.registrasi_matakuliah)
+        print("Memulai proses mengikuti kuliah di program Informatika.")
+        self.next(self.bayar_spp)
 
     @step
-    def registrasi_matakuliah(self):
-        """Step untuk registrasi matakuliah awal semester."""
-        print("Mahasiswa melakukan registrasi matakuliah untuk semester ini.")
-        self.next(self.pembayaran)
+    def bayar_spp(self):
+        print("Mahasiswa melakukan pembayaran SPP untuk semester ini.")
+        self.next(self.registrasi_kuliah)
 
     @step
-    def pembayaran(self):
-        """Step untuk proses pembayaran semester."""
-        print("Mahasiswa melakukan pembayaran semester.")
-        self.next(self.perencanaan_studi)
+    def registrasi_kuliah(self):
+        print("Mahasiswa melakukan registrasi mata kuliah.")
+        self.next(self.mengikuti_kuliah)
 
     @step
-    def perencanaan_studi(self):
-        """Step untuk merencanakan dan mengisi KRS."""
-        print("Mahasiswa merencanakan studi dan mengisi KRS.")
-        self.next(self.kehadiran_kuliah)
+    def mengikuti_kuliah(self):
+        print("Mahasiswa aktif mengikuti perkuliahan.")
+        self.next(self.mengerjakan_tugas)
 
     @step
-    def kehadiran_kuliah(self):
-        """Step untuk mengikuti kuliah tatap muka atau daring."""
-        print("Mahasiswa mengikuti kuliah.")
+    def mengerjakan_tugas(self):
+        print("Mahasiswa mengerjakan tugas-tugas dari dosen.")
         self.next(self.mengerjakan_ujian)
 
     @step
     def mengerjakan_ujian(self):
-        """Step untuk mengikuti ujian tengah semester dan akhir semester."""
-        print("Mahasiswa mengerjakan ujian akhir semester.")
+        print("Mahasiswa mengikuti ujian tengah semester dan ujian akhir semester.")
         self.next(self.mendapatkan_nilai)
 
     @step
     def mendapatkan_nilai(self):
-        """Step untuk mendapatkan hasil nilai dari ujian semester."""
-        print("Mahasiswa mendapatkan nilai ujian dan KHS.")
-        self.next(self.akhir_semester)
-
-    @step
-    def akhir_semester(self):
-        """Step akhir yang menandakan semester selesai."""
-        print("Semester selesai, mahasiswa berhasil melewati proses akademik.")
+        print("Mahasiswa mendapatkan nilai akhir mata kuliah.")
         self.next(self.end)
 
     @step
     def end(self):
-        """This is the 'end' step. All flows must have an 'end' step, which is the last step in the flow."""
-        print("Proses akademik semester selesai.")
-        
+        print("Proses perkuliahan selesai. Mahasiswa berhasil menyelesaikan semester.")
+
 if __name__ == "__main__":
-    SemesterFlow()
+    KuliahFlow()

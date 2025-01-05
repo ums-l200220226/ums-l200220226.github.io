@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Laporan Analisis WhatsApp</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body
+    class="bg-gradient-to-r from-pink-50 via-pink-100 to-pink-200 min-h-screen font-sans p-8"
+  >
+    <!-- Header -->
+    <header class="text-center mb-10">
+      <h1 class="text-5xl font-extrabold text-pink-600 drop-shadow-lg">
+        Laporan Analisis WhatsApp
+      </h1>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+      <div class="container mx-auto max-w-4xl">
+        <!-- Data Mahasiswa -->
+        <section class="info mb-10 p-6 bg-white rounded-xl shadow-lg">
+          <h2
+            class="text-2xl font-bold text-gray-800 mb-4 border-b-2 border-pink-300 pb-2"
+          >
+            Data Mahasiswa
+          </h2>
+          <div class="text-lg text-gray-700 mb-2">
+            <label class="font-semibold">Nama: </label>
+            <span id="nama">Aminah Estu Utami</span>
+          </div>
+          <div class="text-lg text-gray-700 mb-2">
+            <label class="font-semibold">NIM: </label>
+            <span id="nim">L200220226</span>
+          </div>
+          <div class="text-lg text-gray-700">
+            <label class="font-semibold">Kelas: </label>
+            <span id="kelas">IPSD-D</span>
+          </div>
+        </section>
+
+        <!-- Langkah-Langkah -->
+        <section class="report-content mb-10 p-6 bg-white rounded-xl shadow-lg">
+          <h2
+            class="text-2xl font-bold text-gray-800 mb-4 border-b-2 border-pink-300 pb-2"
+          >
+            Langkah-Langkah
+          </h2>
+          <ul class="list-disc pl-6 text-gray-700 space-y-6">
+            <li>
+              Export konten group WhatsApp menjadi file teks.
+              <img
+                src="gambar/1.png"
+                alt="File teks"
+                class="w-full mt-2 rounded-lg shadow-md"
+              />
+            </li>
+            <li>
+              Pindah file <code>data_group.txt</code> ke direktori
+              <code>ums-l200220226.github.io</code> pada WSL.
+            </li>
+            <li>
+              Menyiapkan kode program.
+              <a href="clustering.html" class="text-pink-500 hover:underline"
+                >Lihat Kode Program</a
+              >
+            </li>
+            <li>
+              Menjalankan kode clustering di WSL dengan perintah:
+              <pre
+                class="bg-gray-100 p-4 rounded-lg shadow-md mt-2 text-sm overflow-auto"
+              >
+python clustering.py run --n_clusters 3 --output_csv hasil_klaster.csv
+              </pre>
+              <img
+                src="gambar/2.png"
+                alt="File CSV"
+                class="w-full mt-4 rounded-lg shadow-md"
+              />
+            </li>
+            <li>
+              Hasil Analisis
+              <ul class="list-decimal pl-8 space-y-4">
+                <li>
+                  Jumlah Pesan
+                  <ul class="list-disc pl-6">
+                    <li>
+                      Total pesan yang dimuat dari file log WhatsApp: 2.042
+                      pesan.
+                    </li>
+                    <li>
+                      Setelah proses pembersihan, jumlah pesan berkurang menjadi
+                      1.986 pesan.
+                    </li>
+                    <li>
+                      Penurunan pesan: 56 pesan dihapus selama proses
+                      pembersihan.
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  TF-IDF Vectorization
+                  <ul class="list-disc pl-6">
+                    <li>
+                      TF-IDF menghasilkan matriks dengan bentuk (1.986, 2.337).
+                    </li>
+                    <li>1.986: Jumlah pesan setelah pembersihan.</li>
+                    <li>
+                      2.337: Jumlah fitur (kata unik) yang dihasilkan setelah
+                      proses vektorisasi.
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  Klasterisasi
+                  <ul class="list-disc pl-6">
+                    <li>
+                      Algoritma KMeans berhasil mengelompokkan pesan ke dalam 3
+                      klaster:
+                      <ul class="pl-6">
+                        <li>Klaster 0: 1.686 pesan.</li>
+                        <li>Klaster 1: 273 pesan.</li>
+                        <li>Klaster 2: 27 pesan.</li>
+                      </ul>
+                    </li>
+                    <li>
+                      Analisis:
+                      <ul class="pl-6">
+                        <li>
+                          Klaster 0 merupakan konten media yang tidak
+                          disertakan, mengapa begitu? karena saya tidak
+                          menyertakan media saat export data group.
+                        </li>
+                        <li>
+                          Klaster 2 dan 3 mencakup sebagian besar pesan dengan
+                          tema umum.
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  Kata Teratas per Klaster
+                  <ul class="list-disc pl-6">
+                    <li>Klaster 0: disertakan, media, tidak (konten media).</li>
+                    <li>Klaster 1: mas, aku, ini (kata ganti).</li>
+                    <li>Klaster 2: apa, peke, di (kata fungsi).</li>
+                  </ul>
+                </li>
+                <li>
+                  Penyimpanan Hasil
+                  <ul class="list-disc pl-6">
+                    <li>
+                      Hasil klasterisasi disimpan ke file CSV:
+                      <code>hasil_klaster.csv</code>.
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </section>
+      </div>
+    </main>
+
+    <!-- Tombol Kembali ke Halaman Index -->
+    <section class="text-center mt-10">
+      <a
+        href="index.html"
+        class="bg-pink-500 text-white px-6 py-3 rounded-lg shadow-md hover:shadow-lg hover:bg-pink-600 transition inline-block"
+      >
+        Kembali
+      </a>
+    </section>
+  </body>
+</html>

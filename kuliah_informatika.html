@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simulasi Kuliah Flow</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body
+    class="bg-gradient-to-r from-pink-50 via-pink-100 to-pink-200 min-h-screen p-8 font-sans"
+  >
+    <div class="container mx-auto max-w-full">
+      <header
+        class="bg-pink-600 text-white py-6 mb-7 rounded-lg shadow-md text-center"
+      >
+        <h1 class="text-3xl font-bold">Simulasi Kuliah Flow</h1>
+      </header>
+
+      <!-- Grid untuk Kode dan Output -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+        <!-- Kode Python -->
+        <div class="flex flex-col">
+          <h3 class="text-2xl font-semibold text-gray-800 mb-4">Kode Python</h3>
+          <pre
+            class="bg-pink-100 p-6 rounded-lg text-left border border-gray-300 overflow-auto h-[450px]"
+          >
+from metaflow import FlowSpec, step
+
+class KuliahFlow(FlowSpec):
+    @step
+    def start(self):
+        print("Memulai proses mengikuti kuliah di program Informatika.")
+        self.next(self.bayar_spp)
+
+    @step
+    def bayar_spp(self):
+        print("Mahasiswa melakukan pembayaran SPP untuk semester ini.")
+        self.next(self.registrasi_kuliah)
+
+    @step
+    def registrasi_kuliah(self):
+        print("Mahasiswa melakukan registrasi mata kuliah.")
+        self.next(self.mengikuti_kuliah)
+
+    @step
+    def mengikuti_kuliah(self):
+        print("Mahasiswa aktif mengikuti perkuliahan.")
+        self.next(self.mengerjakan_tugas)
+
+    @step
+    def mengerjakan_tugas(self):
+        print("Mahasiswa mengerjakan tugas-tugas dari dosen.")
+        self.next(self.mengerjakan_ujian)
+
+    @step
+    def mengerjakan_ujian(self):
+        print("Mahasiswa mengikuti ujian tengah semester dan ujian akhir semester.")
+        self.next(self.mendapatkan_nilai)
+
+    @step
+    def mendapatkan_nilai(self):
+        print("Mahasiswa mendapatkan nilai akhir mata kuliah.")
+        self.next(self.end)
+
+    @step
+    def end(self):
+        print("Proses perkuliahan selesai. Mahasiswa berhasil menyelesaikan semester.")
+
+if __name__ == "__main__":
+    KuliahFlow()
+          </pre>
+        </div>
+
+        <!-- Output Hasil Simulasi -->
+        <div class="flex flex-col">
+          <h3 class="text-2xl font-semibold text-gray-800 mb-4">Output</h3>
+          <pre
+            id="logs"
+            class="bg-gray-50 text-gray-700 p-6 rounded-lg border border-gray-300 overflow-auto h-[450px]"
+          >
+Klik tombol untuk melihat hasilnya...
+          </pre>
+          <div class="flex justify-between mt-3">
+            <!-- Tombol Back ke Index -->
+            <a
+              href="index.html"
+              class="bg-gray-800 text-white px-6 py-2 rounded-lg shadow-md hover:shadow-lg hover:bg-gray-900 transition duration-300"
+            >
+              Kembali
+            </a>
+
+            <!-- Tombol Jalankan Simulasi -->
+            <button
+              onclick="runKuliahFlow()"
+              class="bg-pink-500 text-white px-6 py-2 rounded-lg shadow-md hover:shadow-lg hover:bg-pink-700 transition duration-300"
+            >
+              Jalankan Simulasi
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function runKuliahFlow() {
+        const logs = [];
+        logs.push("Memulai proses mengikuti kuliah di program Informatika.");
+
+        const sppTerbayar = true;
+        if (sppTerbayar) {
+          logs.push("SPP berhasil dibayarkan.");
+          logs.push("Mahasiswa melakukan registrasi mata kuliah.");
+          logs.push("Mahasiswa aktif mengikuti perkuliahan.");
+          logs.push("Mahasiswa mengerjakan tugas-tugas dari dosen.");
+          logs.push(
+            "Mahasiswa mengikuti ujian tengah semester dan ujian akhir semester."
+          );
+          logs.push("Mahasiswa mendapatkan nilai akhir mata kuliah.");
+        } else {
+          logs.push("SPP belum dibayarkan. Proses dihentikan.");
+        }
+
+        logs.push(
+          "Proses perkuliahan selesai. Mahasiswa berhasil menyelesaikan semester."
+        );
+
+        const logsDiv = document.getElementById("logs");
+        logsDiv.innerHTML = logs
+          .map(
+            (log) =>
+              `<div class='bg-pink-100 text-pink-700 p-3 rounded-lg mb-3'>${log}</div>`
+          )
+          .join("");
+      }
+    </script>
+  </body>
+</html>
